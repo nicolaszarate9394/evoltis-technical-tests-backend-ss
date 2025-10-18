@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("technical-tests-backend-ssr")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf53f0e5e22464c05bd80d6143fa7948c8df8513")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7b6131cf41535e57db96b64b62cb073496eadde")]
 [assembly: System.Reflection.AssemblyProductAttribute("technical-tests-backend-ssr")]
 [assembly: System.Reflection.AssemblyTitleAttribute("technical-tests-backend-ssr")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

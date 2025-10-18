@@ -1,0 +1,61 @@
+﻿using AutoMapper;
+using technical_tests_backend_ssr.Models.DTOs;
+using technical_tests_backend_ssr.Models.Entities;
+using technical_tests_backend_ssr.Repositories;
+
+namespace technical_tests_backend_ssr.Services
+{
+    public class ProductService : IProductService
+    {
+        private readonly IProductRepository _repository;
+        private readonly IMapper _mapper;
+
+        public ProductService(IProductRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<ProductDto>> GetAllAsync()
+        {
+            var products = await _repository.GetAllAsync();
+            return _mapper.Map<IEnumerable<ProductDto>>(products);
+        }
+
+        public async Task<ProductDto?> GetByIdAsync(int id)
+        {
+            var product = await _repository.GetByIdAsync(id);
+            return _mapper.Map<ProductDto?>(product);
+        }
+
+        public async Task<ProductDto> CreateAsync(ProductDto dto)
+        {
+            var product = _mapper.Map<Product>(dto);
+            await _repository.AddAsync(product);
+            await _repository.SaveChangesAsync();
+            return _mapper.Map<ProductDto>(product);
+        }
+
+        public async Task<ProductDto?> UpdateAsync(int id, ProductDto dto)
+        {
+            var product = await _repository.GetByIdAsync(id);
+            if (product == null) return null;
+
+            _mapper.Map(dto, product);
+            _repository.Update(product);
+            await _repository.SaveChangesAsync();
+
+            return _mapper.Map<ProductDto>(product);
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var product = await _repository.GetByIdAsync(id);
+            if (product == null) return false;
+
+            _repository.Delete(product);
+            await _repository.SaveChangesAsync();
+            return true;
+        }
+    }
+}
